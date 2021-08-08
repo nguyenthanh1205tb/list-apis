@@ -1,0 +1,21 @@
+query countries {
+  countries{
+    name
+    native
+    phone
+    continent {
+      code
+      name
+    }
+    capital
+    languages {
+      code
+      name
+      native
+    }
+    states {
+      code
+      name
+    }
+  }
+}
