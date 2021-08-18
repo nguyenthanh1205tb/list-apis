@@ -13,6 +13,7 @@ function Dashboard({ history }: PropsWithChildren<DashboardProps>) {
   }, [])
   return (
     <div>
+      <h1>Dashboard page</h1>
       <AnchorButton text="Go to user manage" onClick={() => history.push('/admin/management')} />
     </div>
   )
