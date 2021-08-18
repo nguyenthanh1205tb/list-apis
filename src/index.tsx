@@ -2,10 +2,14 @@ import { ApolloProvider } from '@apollo/client'
 import React, { FunctionComponent } from 'react'
 import ReactDOM from 'react-dom'
 import { setConfig } from 'react-hot-loader'
+import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
+import Theme from 'src/styled/Theme'
+import { ThemeProvider } from 'styled-components'
 import { client } from './apollo'
 import App from './App'
+import i18next from './i18next'
 import './index.css'
 import reportWebVitals from './reportWebVitals'
 import Store from './store'
@@ -20,7 +24,11 @@ const render = (Component: FunctionComponent) => {
     <ApolloProvider client={client}>
       <Provider store={Store}>
         <BrowserRouter>
-          <Component />
+          <ThemeProvider theme={Theme}>
+            <I18nextProvider i18n={i18next}>
+              <Component />
+            </I18nextProvider>
+          </ThemeProvider>
         </BrowserRouter>
       </Provider>
     </ApolloProvider>,
