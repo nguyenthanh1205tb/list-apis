@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Redirect, Route } from 'react-router-dom'
 import PermissionDenied from 'src/components/Exceptions/403'
 import { useSelector } from 'src/store'
 import { Router } from 'src/types/Root'
@@ -13,7 +13,7 @@ function PrivateRoute({ component: Component, auth, ...props }: PrivateRouteProp
       {...props}
       render={props => {
         if (!userInfo) {
-          return <PermissionDenied />
+          return <Redirect to="/login" />
         }
         return <Component {...props} />
       }}
