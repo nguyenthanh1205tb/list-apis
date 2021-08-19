@@ -1,6 +1,5 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
-import PermissionDenied from 'src/components/Exceptions/403'
 import { useSelector } from 'src/store'
 import { Router } from 'src/types/Root'
 

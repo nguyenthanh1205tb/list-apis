@@ -68,11 +68,14 @@
     "@graphql-codegen/typescript": "^2.0.0",
     "@graphql-codegen/typescript-operations": "^2.0.1",
     "@graphql-codegen/typescript-react-apollo": "^3.0.0",
+    "@types/logrocket-react": "^3.0.0",
     "@types/react-router-dom": "^5.1.7",
     "@types/styled-components": "^5.1.12",
     "@types/webpack-env": "^1.16.0",
     "prettier": "^2.3.0",
     "redux-devtools-extension": "^2.13.9",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "logrocket": "^2.0.0",
+    "logrocket-react": "^4.0.1"
   }
 }
