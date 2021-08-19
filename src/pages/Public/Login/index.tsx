@@ -6,7 +6,6 @@ import LoginForm from './components/LoginForm'
 interface LoginPageProps extends RouteComponentProps {}
 
 function LoginPage(props: PropsWithChildren<LoginPageProps>) {
-
   return (
     <FlexContainer center heightScreen>
       <FlexContainer center vertical>

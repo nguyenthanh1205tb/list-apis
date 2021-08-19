@@ -15,7 +15,6 @@ const SCHEMA_FORM = yup.object().shape({
 })
 
 function LoginForm(_props: PropsWithChildren<LoginFormProps>) {
-
   const [t] = useTranslation()
 
   const {
@@ -25,7 +24,7 @@ function LoginForm(_props: PropsWithChildren<LoginFormProps>) {
     control,
   } = useForm({
     resolver: yupResolver(SCHEMA_FORM),
-    mode: 'onChange'
+    mode: 'onChange',
   })
 
   const onSubmit = handleSubmit(values => {
