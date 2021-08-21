@@ -1,3 +1,2 @@
-export default {
-  test: 'abc',
-}
+const theme = {}
+export default theme

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Redirect, Route } from 'react-router-dom'
-import { Router } from 'src/types/Root'
+import { Router } from 'src/types'
 
 interface PublicRouteProps extends Router {}
 

@@ -6,15 +6,17 @@ import { useTranslation } from 'react-i18next'
 import { RouteComponentProps } from 'react-router'
 import * as yup from 'yup'
 
-interface LoginFormProps extends RouteComponentProps {}
+interface LoginFormProps extends RouteComponentProps {
+  login: (email: string, pwd: string) => void
+}
 
 const SCHEMA_FORM = yup.object().shape({
   email: yup.string().required(),
-  password: yup.string().required().min(8).max(21),
+  password: yup.string().required().min(6).max(16),
   remember: yup.boolean().optional().default(false),
 })
 
-function LoginForm(_props: PropsWithChildren<LoginFormProps>) {
+function LoginForm({ login }: PropsWithChildren<LoginFormProps>) {
   const [t] = useTranslation()
 
   const {
@@ -29,7 +31,7 @@ function LoginForm(_props: PropsWithChildren<LoginFormProps>) {
 
   const onSubmit = handleSubmit(values => {
     if (isValid) {
-      console.log(values)
+      login(values.email, values.password)
     }
   })
 

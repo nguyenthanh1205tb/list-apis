@@ -1,21 +1,20 @@
-export type Events = {
+type Events = {
   [key: string]: { (data: any): void }[]
 }
 
-export interface EventEmitter {
+interface EventEmitter {
   _events: Events
   dispatch(event: string, data?: any): void
-  subscribe(event: string, callback: (data: any) => any): void
+  subscribe(event: string, callback: (data: any) => void): void
   unsubscribe(event: string): void
 }
-
 const Emitter: EventEmitter = {
   _events: {},
-  dispatch(event, data) {
+  dispatch(event: string, data) {
     if (!this._events[event]) return
     this._events[event].forEach(callback => callback(data))
   },
-  subscribe(event, callback: (data: any) => any) {
+  subscribe(event, callback: (data: any) => void) {
     if (!this._events[event]) this._events[event] = []
     this._events[event].push(callback)
   },

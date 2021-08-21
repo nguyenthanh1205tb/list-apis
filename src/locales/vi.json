@@ -2,6 +2,7 @@
   "translation": {
     "login": "Đăng nhập",
     "enter your email": "Nhập email",
-    "enter your password": "Nhập mật khẩu"
+    "enter your password": "Nhập mật khẩu",
+    "login-fail": "Sai email hoặc mật khẩu"
   }
 }

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { Redirect, Route, Switch } from 'react-router-dom'
 import NotFound from 'src/components/Exceptions/404'
-import { Router } from 'src/types/Root'
+import { Router } from 'src/types'
 import RenderRoute from 'src/components/Auth/index'
 
 function ChildRoute(route: Router): ReactNode {

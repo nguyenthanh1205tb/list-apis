@@ -2,6 +2,7 @@
   "translation": {
     "login": "Login",
     "enter your email": "Enter your email",
-    "enter your password": "Enter your password"
+    "enter your password": "Enter your password",
+    "login-fail": "Wrong email or password"
   }
 }

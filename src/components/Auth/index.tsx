@@ -1,6 +1,6 @@
 import React, { ReactNode, Suspense } from 'react'
 import { Route } from 'react-router-dom'
-import { Router } from 'src/types/Root'
+import { Router } from 'src/types'
 import RenderChildRoute from 'src/components/Auth/ChildRoute'
 import PrivateRoute from 'src/components/Auth/PrivateRoute'
 import PublicRoute from 'src/components/Auth/PublicRoute'

@@ -1,7 +1,7 @@
 import { createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { useSelector as useReduxSelector, TypedUseSelectorHook } from 'react-redux'
-import RootReducer from 'src/reducers'
+import RootReducer from 'src/_reducers'
 
 const composeEnhancers = composeWithDevTools({})
 

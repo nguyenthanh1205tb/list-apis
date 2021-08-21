@@ -1,5 +1,5 @@
 import { lazy } from 'react'
-import { Router } from 'src/types/Root'
+import { Router } from 'src/types'
 import PrivateLayout from 'src/layouts/Private'
 import PublicLayout from 'src/layouts/Public'
 

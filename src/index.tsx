@@ -13,7 +13,6 @@ import i18next from './i18next'
 import './index.css'
 import reportWebVitals from './reportWebVitals'
 import Store from './store'
-import './logRocket'
 
 setConfig({
   showReactDomPatchNotification: false,
