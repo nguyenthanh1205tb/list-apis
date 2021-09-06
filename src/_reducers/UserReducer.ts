@@ -1,4 +1,10 @@
-import { States } from 'src/types/Reducer.User'
+import { Maybe } from 'yup/lib/types'
+import FirebaseApp from 'src/hooks/useFirebase'
+export type UserInfo = FirebaseApp.auth.UserCredential
+
+export type States = {
+  userInfo: Maybe<UserInfo>
+}
 
 const initialState: States = {
   userInfo: null,
