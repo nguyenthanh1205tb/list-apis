@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux'
-import { UserInfo } from 'src/types'
 import { SET_USER } from 'src/_actions/UserActions'
+import { UserInfo } from 'src/_reducers/UserReducer'
 
 function useUser() {
   const dispatch = useDispatch()
