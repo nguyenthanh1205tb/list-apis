@@ -1,14 +1,11 @@
-import { Button } from '@blueprintjs/core'
-import React, { PropsWithChildren, Fragment } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
+import React, { Fragment, PropsWithChildren } from 'react'
 
-interface PrivateLayoutProps extends RouteComponentProps {}
+interface PrivateLayoutProps {}
 
-function PrivateLayout({ children, history }: PropsWithChildren<PrivateLayoutProps>) {
+function PrivateLayout({ children }: PropsWithChildren<PrivateLayoutProps>) {
   return (
     <Fragment>
       <h1>PRIVATE LAYOUT</h1>
-      <Button text="Back to login page" onClick={() => history.push('/')} />
       {children}
     </Fragment>
   )

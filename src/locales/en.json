@@ -3,6 +3,8 @@
     "login": "Login",
     "enter your email": "Enter your email",
     "enter your password": "Enter your password",
-    "login-fail": "Wrong email or password"
+    "login fail": "Wrong email or password",
+    "email is required": "email is required",
+    "password is required": "password is required"
   }
 }

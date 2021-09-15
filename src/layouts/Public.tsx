@@ -1,7 +1,6 @@
 import React, { PropsWithChildren, Fragment } from 'react'
-import { RouteComponentProps } from 'react-router-dom'
 
-interface PublicLayoutProps extends RouteComponentProps {}
+interface PublicLayoutProps {}
 
 function PublicLayout({ children }: PropsWithChildren<PublicLayoutProps>) {
   return <Fragment>{children}</Fragment>

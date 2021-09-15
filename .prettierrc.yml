@@ -6,4 +6,6 @@ printWidth: 120
 bracketSpacing: true
 arrowParens: "avoid"
 jsxBracketSameLine: true
+insertPragma: false
+htmlWhitespaceSensitivity: "strict"
 endOfLine: "crlf"

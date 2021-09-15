@@ -1,4 +1,4 @@
-import { Maybe } from 'yup/lib/types'
+import { Maybe } from 'graphql/jsutils/Maybe'
 import FirebaseApp from 'src/hooks/useFirebase'
 export type UserInfo = FirebaseApp.auth.UserCredential
 
