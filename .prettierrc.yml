@@ -5,7 +5,7 @@ tabWidth: 2
 printWidth: 120
 bracketSpacing: true
 arrowParens: "avoid"
-jsxBracketSameLine: true
+bracketSameLine: true
 insertPragma: false
 htmlWhitespaceSensitivity: "strict"
 endOfLine: "crlf"

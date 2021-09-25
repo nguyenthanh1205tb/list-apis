@@ -22,10 +22,9 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
-    "pre-format": "prettier --write \"./**/*.{js,jsx,ts,tsx}\"",
+    "format": "prettier --write \"./**/*.{js,jsx,ts,tsx}\"",
     "pre-check": "prettier --check \"./**/*.{js,jsx,ts,tsx}\"",
-    "ts-format": "tslint -c tslint.json \"./**/*.{js,jsx,ts,tsx}\" --fix --format verbose",
-    "ts-check": "tslint-config-prettier-check ./tslint.json",
+    "eslint": "eslint \"./**/*.{js,jsx,ts,tsx}\" --quiet --fix",
     "generate": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {
@@ -66,15 +65,15 @@
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
     "autoprefixer": "^9",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.26.0",
     "postcss": "^7",
-    "prettier": "^2.3.0",
+    "prettier": "^2.4.1",
     "react-scripts": "4.0.3",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
-    "tslint": "^6.1.3",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-plugin-prettier": "^2.3.0",
-    "tslint-react": "^5.0.0"
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
   }
 }
