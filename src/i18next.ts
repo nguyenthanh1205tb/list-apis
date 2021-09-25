@@ -26,7 +26,7 @@ const loadedLanguages = ['vi']
 
 function setI18nLanguage(lang: string): string {
   i18n.changeLanguage(lang)
-  document.querySelector('html')!.setAttribute('lang', lang)
+  document.querySelector('html')?.setAttribute('lang', lang)
   return lang
 }
 

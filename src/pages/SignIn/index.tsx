@@ -1,5 +1,4 @@
 import React, { PropsWithChildren } from 'react'
-import { useTranslation } from 'react-i18next'
 import { RouteComponentProps } from 'react-router'
 import { Auth } from 'src/hooks/useFirebase'
 import useUser from 'src/hooks/useUser'
@@ -10,7 +9,6 @@ type LoginPageProps = RouteComponentProps
 function LoginPage(props: PropsWithChildren<LoginPageProps>) {
   const { history } = props
   const { set: setUser } = useUser()
-  const [t] = useTranslation()
   const loginWithEmailAndPassword = async (email: string, pwd: string) => {
     try {
       const result = await Auth().signInWithEmailAndPassword(email, pwd)

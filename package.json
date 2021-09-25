@@ -24,7 +24,7 @@
     "eject": "craco eject",
     "format": "prettier --write \"./**/*.{js,jsx,ts,tsx}\"",
     "pre-check": "prettier --check \"./**/*.{js,jsx,ts,tsx}\"",
-    "eslint": "eslint \"./**/*.{js,jsx,ts,tsx}\" --quiet --fix",
+    "eslint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --fix",
     "generate": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {

@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom'
 
 type RegisterPageProps = RouteComponentProps
 
-function RegisterPage({ history }: PropsWithChildren<RegisterPageProps>) {
+function RegisterPage({}: PropsWithChildren<RegisterPageProps>) {
   return (
     <div>
       <h1>Register page</h1>

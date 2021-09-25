@@ -10,11 +10,11 @@ interface EventEmitter {
 }
 const Emitter: EventEmitter = {
   _events: {},
-  dispatch(event: string, data) {
+  async dispatch(event: string, data) {
     if (!this._events[event]) return
-    this._events[event].forEach(callback => callback(data))
+    await new Promise(resolve => setTimeout(() => resolve(this._events[event].forEach(callback => callback(data)))))
   },
-  subscribe(event, callback: (data: any) => void) {
+  subscribe(event, callback) {
     if (!this._events[event]) this._events[event] = []
     this._events[event].push(callback)
   },
