@@ -5,7 +5,7 @@ import { Auth } from 'src/hooks/useFirebase'
 import useUser from 'src/hooks/useUser'
 import LoginForm from '../../components/SignIn/LoginForm'
 
-interface LoginPageProps extends RouteComponentProps {}
+type LoginPageProps = RouteComponentProps
 
 function LoginPage(props: PropsWithChildren<LoginPageProps>) {
   const { history } = props

@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react'
 import { RouteComponentProps } from 'react-router-dom'
 
-interface RegisterPageProps extends RouteComponentProps {}
+type RegisterPageProps = RouteComponentProps
 
 function RegisterPage({ history }: PropsWithChildren<RegisterPageProps>) {
   return (
