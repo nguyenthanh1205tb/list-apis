@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.4.5",
+    "@reduxjs/toolkit": "^1.6.1",
     "firebase": "^8.10.0",
     "graphql": "^15.5.1",
     "i18next": "^20.4.0",
@@ -23,7 +24,7 @@
     "test": "craco test",
     "eject": "craco eject",
     "format": "prettier --write \"./**/*.{js,jsx,ts,tsx}\"",
-    "pre-check": "prettier --check \"./**/*.{js,jsx,ts,tsx}\"",
+    "lint": "prettier --check \"./**/*.{js,jsx,ts,tsx}\"",
     "eslint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --fix",
     "generate": "graphql-codegen --config codegen.yml"
   },
@@ -60,7 +61,6 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.1.7",
-    "@types/styled-components": "^5.1.12",
     "@types/webpack-env": "^1.16.0",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "@typescript-eslint/parser": "^4.31.2",
