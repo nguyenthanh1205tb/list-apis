@@ -8,4 +8,4 @@ arrowParens: "avoid"
 bracketSameLine: true
 insertPragma: false
 htmlWhitespaceSensitivity: "strict"
-endOfLine: "lf"
+endOfLine: "crlf"

@@ -1,9 +1,10 @@
+/* eslint-disable */
 const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
   style: {
     postcss: {
-      plugins: [require('tailwindcss'), require('autoprefixer')],
+      plugins: [require('autoprefixer')],
     },
   },
   optimization: {

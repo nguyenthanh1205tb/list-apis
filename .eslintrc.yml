@@ -27,3 +27,4 @@ rules:
     - allowSingleExtends: true
   no-console:
     - warn
+  end-ofLine: off
