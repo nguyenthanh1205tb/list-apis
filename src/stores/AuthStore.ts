@@ -14,15 +14,12 @@ class AuthStore {
     makeAutoObservable(this)
   }
 
-  @action async login(payload: LoginResponse): Promise<boolean> {
-    return new Promise(resolve => {
-      this.user = payload.user
-      this.access_token = payload.access_token
-      this.expires = payload.expires
-      jscookie.set('token', payload.access_token, {
-        expires: dayjs(payload.expires).add(2, 'hours').toDate(),
-      })
-      resolve(true)
+  @action login(payload: LoginResponse) {
+    this.user = payload.user
+    this.access_token = payload.access_token
+    this.expires = payload.expires
+    jscookie.set('token', payload.access_token, {
+      expires: dayjs(payload.expires).add(2, 'hours').toDate(),
     })
   }
 
@@ -44,4 +41,5 @@ class AuthStore {
   }
 }
 
-export default AuthStore
+export default new AuthStore()
+export { AuthStore }

@@ -9,17 +9,22 @@ import Container from '@mui/material/Container'
 import { useHistory } from 'react-router-dom'
 import AuthStore from 'src/stores/AuthStore'
 import dayjs from 'dayjs'
+import AuthService from 'src/services/AuthService'
 
 function SignIn() {
-  const authStore = new AuthStore()
+  const authService = new AuthService()
   const history = useHistory()
   const login = async () => {
-    const result = await authStore.login({
-      access_token: 'this is token',
-      expires: dayjs(new Date()).add(2, 'hours').toDate(),
-      user: { _id: '1' },
+    const { err } = await authService.signIn({
+      username: 'test',
+      password: 'pwd',
     })
-    if (result) {
+    if (!err) {
+      AuthStore.login({
+        access_token: 'this is token',
+        expires: dayjs(new Date()).add(2, 'hours').toDate(),
+        user: { _id: '1' },
+      })
       history.push('/sign-up')
     }
   }

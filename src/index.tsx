@@ -5,17 +5,20 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import i18next from './utils/I18next'
 import reportWebVitals from './reportWebVitals'
+import { Provider } from 'mobx-react'
 import { ThemeProvider } from '@mui/material/styles'
 import { theme } from 'src/themes'
 import './index.css'
 
 ReactDOM.render(
   <BrowserRouter>
-    <I18nextProvider i18n={i18next}>
-      <ThemeProvider theme={theme}>
-        <App />
-      </ThemeProvider>
-    </I18nextProvider>
+    <Provider>
+      <I18nextProvider i18n={i18next}>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
+      </I18nextProvider>
+    </Provider>
   </BrowserRouter>,
   document.getElementById('root'),
 )

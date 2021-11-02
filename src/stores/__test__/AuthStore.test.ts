@@ -1,6 +1,8 @@
-import AuthStore from '../AuthStore'
+import { AuthStore } from '../AuthStore'
 import { LoginResponse } from '../../types/auth'
 import { toJS } from 'mobx'
+import { waitFor } from '@testing-library/dom'
+
 describe('Auth Test', () => {
   const store = new AuthStore()
   it('Login', async () => {
@@ -9,8 +11,7 @@ describe('Auth Test', () => {
       expires: new Date(),
       user: { _id: '1' },
     }
-    const result = await store.login(mockData)
-    expect(result).toBe(true)
+    await waitFor(() => store.login(mockData))
     expect(toJS(store.user)).toStrictEqual({ _id: '1' })
   })
 })
