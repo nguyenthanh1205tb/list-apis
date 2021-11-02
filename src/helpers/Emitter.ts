@@ -13,7 +13,11 @@ const Emitter: EventEmitter = {
   _events: {},
   async dispatch(event: string, data) {
     if (!this._events[event]) return
-    await new Promise(resolve => setTimeout(() => resolve(this._events[event].forEach(callback => callback(data)))))
+    await new Promise(resolve =>
+      setTimeout(() =>
+        resolve(this._events[event].forEach(callback => callback(data))),
+      ),
+    )
   },
   subscribe(event, callback) {
     if (!this._events[event]) this._events[event] = []

@@ -9,7 +9,7 @@ import PublicLayout from 'src/layouts/PublicLayout'
  * PAGE COMPONENTS
  */
 import NotFound from './pages/Exceptions/404'
-import SignIn from 'src/pages/Auth/Login'
+import SignIn from 'src/pages/Auth/SignIn'
 import SingUp from 'src/pages/Auth/Signup'
 
 function Router() {

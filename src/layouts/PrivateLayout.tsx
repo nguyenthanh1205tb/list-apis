@@ -1,8 +1,6 @@
 import React, { Fragment, PropsWithChildren } from 'react'
 
-interface PrivateLayoutProps {}
-
-function PrivateLayout({ children }: PropsWithChildren<PrivateLayoutProps>) {
+function PrivateLayout({ children }: PropsWithChildren<unknown>) {
   return (
     <Fragment>
       <h1>PRIVATE LAYOUT</h1>
