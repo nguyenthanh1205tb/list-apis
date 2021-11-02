@@ -11,4 +11,4 @@ function PrivateLayout({ children }: PropsWithChildren<PrivateLayoutProps>) {
   )
 }
 
-export default React.memo(PrivateLayout)
+export default PrivateLayout

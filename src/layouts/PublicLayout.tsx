@@ -6,4 +6,4 @@ function PublicLayout({ children }: PropsWithChildren<PublicLayoutProps>) {
   return <Fragment>{children}</Fragment>
 }
 
-export default React.memo(PublicLayout)
+export default PublicLayout
