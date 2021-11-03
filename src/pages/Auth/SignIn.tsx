@@ -34,7 +34,11 @@ function SignIn() {
         <Container>
           <CardContent>
             <Typography>This is header</Typography>
-            <TextField variant="standard" label="Username" />
+            <TextField
+              data-testid="signin-input-username"
+              variant="standard"
+              label="Username"
+            />
             <TextField type="password" variant="standard" label="Password" />
           </CardContent>
           <CardActions>

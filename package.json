@@ -25,7 +25,9 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "craco test",
+    "test:unit": "craco test --testPathIgnorePatterns=\"./src/__test__/e2e\"",
+    "test:e2e": "cypress open --project \"./src/__test__/e2e\"",
+    "test:e2e:run": "cypress run --project \"./src/__test__/e2e\"",
     "eject": "craco eject",
     "format": "prettier --write \"./**/*.{js,jsx,ts,tsx}\"",
     "lint": "prettier --check \"./**/*.{js,jsx,ts,tsx}\"",

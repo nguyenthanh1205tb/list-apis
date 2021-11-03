@@ -1,4 +1,4 @@
-import { AuthStore } from '../AuthStore'
+import { AuthStore } from '../../stores/AuthStore'
 import { LoginResponse } from '../../types/auth'
 import { toJS } from 'mobx'
 import { waitFor } from '@testing-library/dom'
