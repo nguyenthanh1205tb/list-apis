@@ -39,12 +39,17 @@ function SignIn() {
               variant="standard"
               label="Username"
             />
-            <TextField type="password" variant="standard" label="Password" />
+            <TextField
+              data-testid="signin-input-password"
+              type="password"
+              variant="standard"
+              label="Password"
+            />
           </CardContent>
           <CardActions>
             <Button
+              data-testid="sign-btn-login"
               onClick={login}
-              data-testid="test--btn-login"
               variant="contained">
               Sign in
             </Button>
