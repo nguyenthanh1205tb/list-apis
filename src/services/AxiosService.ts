@@ -1,8 +1,9 @@
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import jscookie from 'js-cookie'
+import { ServiceError } from 'src/services'
 
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_BASEURL,
+  baseURL: process.env.REACT_APP_API_BASE_URI,
   timeout: 20000,
   headers: {
     'Content-Type': 'application/json',
@@ -15,6 +16,17 @@ function getToken(): string {
   return token
 }
 
+function handleError(err: AxiosError): ServiceError | AxiosError {
+  const { response } = err
+  if (!response) return err
+  return {
+    message: response.data.message,
+    statusCode: response.data.statusCode,
+    statusText: response.statusText,
+    timestamp: response.data.timestamp,
+  }
+}
+
 instance.interceptors.request.use(
   config => {
     config.headers = {
@@ -22,12 +34,12 @@ instance.interceptors.request.use(
     }
     return config
   },
-  error => Promise.reject(error),
+  error => Promise.reject(handleError(error)),
 )
 
 instance.interceptors.response.use(
-  response => response,
-  error => Promise.reject(error),
+  response => Promise.resolve(response),
+  error => Promise.reject(handleError(error)),
 )
 
 export default {

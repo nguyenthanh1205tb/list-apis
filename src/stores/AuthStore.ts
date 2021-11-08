@@ -1,45 +1,33 @@
-import dayjs from 'dayjs'
+import { action, computed, makeAutoObservable, observable, toJS } from 'mobx'
+import { UserPoolConfig } from 'src/services/AuthService.type'
+import { Maybe } from 'src/@types'
+import { CognitoUserSession } from 'amazon-cognito-identity-js'
 import jscookie from 'js-cookie'
-import { action, makeAutoObservable, observable } from 'mobx'
-import { Maybe } from 'src/types'
-import { LoginResponse } from 'src/types/auth'
-import { User } from 'src/types/user'
 
 class AuthStore {
-  @observable user: Maybe<User> = null
-  @observable access_token: Maybe<string> = null
-  @observable expires: Maybe<number | Date> = null
+  @observable private _UserPoolConfig: Maybe<UserPoolConfig> = null
+  @observable private _cognitoUserSession: Maybe<CognitoUserSession> = null
 
   constructor() {
     makeAutoObservable(this)
   }
 
-  @action login(payload: LoginResponse) {
-    this.user = payload.user
-    this.access_token = payload.access_token
-    this.expires = payload.expires
-    jscookie.set('token', payload.access_token, {
-      expires: dayjs(payload.expires).add(2, 'hours').toDate(),
-    })
+  @computed get userPoolConfig(): Maybe<UserPoolConfig> {
+    return toJS(this._UserPoolConfig)
   }
 
-  @action logout() {
-    this.user = null
-    this.access_token = null
-    this.expires = null
-    jscookie.remove('token')
+  @computed get cognitoUserSession(): Maybe<CognitoUserSession> {
+    return toJS(this._cognitoUserSession)
   }
 
-  @action setUser(user: User) {
-    if (user) {
-      Object.keys(user).map(item => {
-        if (user[item] && this.user) {
-          this.user[item] = user[item]
-        }
-      })
-    }
+  @action setUserPoolConfig = (payload: Maybe<UserPoolConfig>) => {
+    this._UserPoolConfig = payload
+  }
+
+  @action setCognitoUserSession = (payload: CognitoUserSession) => {
+    this._cognitoUserSession = payload
+    jscookie.set('token', payload.getAccessToken().getJwtToken())
   }
 }
 
 export default new AuthStore()
-export { AuthStore }

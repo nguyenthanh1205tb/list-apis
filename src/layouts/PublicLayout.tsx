@@ -1,19 +1,26 @@
 import React, { PropsWithChildren } from 'react'
-import { Container } from '@mui/material'
 import { Box } from '@mui/system'
 
 function PublicLayout({ children }: PropsWithChildren<unknown>) {
   return (
-    <Container component="main" maxWidth="xs">
+    <Box
+      component="main"
+      sx={{
+        backgroundImage: 'url(/static/images/dashboard-bg.png)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}>
       <Box
         display="flex"
         alignItems="center"
         height="100vh"
         maxHeight="100vh"
-        width="100%">
+        width="100%"
+        justifyContent="center"
+        overflow="hidden">
         {children}
       </Box>
-    </Container>
+    </Box>
   )
 }
 
