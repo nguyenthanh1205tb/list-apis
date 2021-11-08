@@ -1,5 +1,5 @@
-import React from 'react'
-import { Redirect, Route, Switch } from 'react-router-dom'
+import React, { lazy, Suspense } from 'react'
+import { Navigate, Route, Routes } from 'react-router-dom'
 /**
  * LAYOUT COMPONENTS
  */
@@ -8,44 +8,41 @@ import PublicLayout from 'src/layouts/PublicLayout'
 /**
  * PAGE COMPONENTS
  */
-import NotFound from './pages/Exceptions/404'
-import SignIn from 'src/pages/Auth/SignIn'
-import SingUp from 'src/pages/Auth/Signup'
+import NotFound from './components/Exceptions/404'
+const SignIn = lazy(() => import('src/pages/Auth/SignIn'))
+const SingUp = lazy(() => import('src/pages/Auth/Signup'))
 
 function Router() {
   return (
-    <Switch>
+    <Routes>
+      <Route path="/" element={<Navigate to="/sign-in" />} />
+      <Route path="/auth" element={<Navigate to="/auth/reports" />} />
       <Route
-        path="/a"
-        render={() => (
-          <PrivateLayout>
-            <Switch>
-              <Redirect exact strict from="/a" to="/a/reports" />
-              {/* <Route
-                  path="/a/manage"
-                  render={() => (
-                    <ManagesLayout>
-                      <Switch>
-                        <Redirect exact strict from="/a/manage" to="/a/manage/users" />
-                      </Switch>
-                    </ManagesLayout>
-                  )}
-                /> */}
-              <Route component={NotFound} />
-            </Switch>
-          </PrivateLayout>
-        )}
+        path="/*"
+        element={
+          <Suspense fallback={<div>loading...</div>}>
+            <PublicLayout>
+              <Routes>
+                <Route path="sign-in" element={<SignIn />} />
+                <Route path="sign-up" element={<SingUp />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </PublicLayout>
+          </Suspense>
+        }
       />
-
-      <PublicLayout>
-        <Switch>
-          <Redirect exact strict from="/" to="/sign-in" />
-          <Route exact strict sensitive path="/sign-in" component={SignIn} />
-          <Route exact strict sensitive path="/sign-up" component={SingUp} />
-          <Route component={NotFound} />
-        </Switch>
-      </PublicLayout>
-    </Switch>
+      <Route
+        path="/auth/*"
+        element={
+          <PrivateLayout>
+            <Routes>
+              <Route path="reports" element={<div>this is reports page</div>} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </PrivateLayout>
+        }
+      />
+    </Routes>
   )
 }
 export default Router

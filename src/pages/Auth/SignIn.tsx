@@ -1,63 +1,164 @@
-import React from 'react'
-import Button from '@mui/material/Button'
-import Card from '@mui/material/Card'
-import CardContent from '@mui/material/CardContent'
-import CardActions from '@mui/material/CardActions'
-import TextField from '@mui/material/TextField'
-import Typography from '@mui/material/Typography'
-import Container from '@mui/material/Container'
-import { useHistory } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
+import {
+  CardContent,
+  CircularProgress,
+  Grid,
+  IconButton,
+  InputAdornment,
+  TextFieldProps,
+} from '@mui/material'
+import { Box } from '@mui/system'
+import { observer } from 'mobx-react-lite'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import ButtonGroupStyled from 'src/components/ButtonGroupStyled'
+import ButtonStyled from 'src/components/ButtonStyled'
+import theme from 'src/theme'
+import * as Yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { CardStyled, TextFieldStyled } from './Styled'
 import AuthStore from 'src/stores/AuthStore'
-import dayjs from 'dayjs'
-import AuthService from 'src/services/AuthService'
+import { CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js'
+import AWSCognitoService from 'src/services/AWSCognitoService'
+import { toast } from 'react-toastify'
+
+const textFieldProps: TextFieldProps = {
+  margin: 'normal',
+  variant: 'outlined',
+  fullWidth: true,
+  size: 'medium',
+}
+
+type loginFormData = {
+  username: string
+  password: string
+}
+
+const loginFormSchema = Yup.object().shape({
+  username: Yup.string().required(),
+  password: Yup.string().required(),
+})
 
 function SignIn() {
-  const authService = new AuthService()
-  const history = useHistory()
-  const login = async () => {
-    const { err } = await authService.signIn({
-      username: 'test',
-      password: 'pwd',
+  const navigate = useNavigate()
+  const { userPoolConfig, cognitoUserSession, setCognitoUserSession } =
+    AuthStore
+  const [loginLoading, setLoginLoading] = useState<boolean>(false)
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<loginFormData>({
+    mode: 'onChange',
+    resolver: yupResolver(loginFormSchema),
+  })
+
+  const [passwordVisible, setPasswordVisible] = useState<boolean>(false)
+
+  const onSubmit = handleSubmit(values => {
+    if (!userPoolConfig) throw new Error('userPoolConfig is null')
+    setLoginLoading(true)
+    const pool = new CognitoUserPool({
+      ClientId: userPoolConfig.cognito_client_id,
+      UserPoolId: userPoolConfig.cognito_pool_id,
     })
-    if (!err) {
-      AuthStore.login({
-        access_token: 'this is token',
-        expires: dayjs(new Date()).add(2, 'hours').toDate(),
-        user: { _id: '1' },
-      })
-      history.push('/sign-up')
-    }
-  }
+    const user = new CognitoUser({ Username: values.username, Pool: pool })
+    const { signInWithCognitoUser } = new AWSCognitoService({ user, pool })
+    signInWithCognitoUser(
+      { username: values.username, password: values.password },
+      {
+        onSuccess: data => {
+          setCognitoUserSession(data)
+          setLoginLoading(false)
+        },
+        onFailure: (err: Error) => {
+          toast(err.message, {
+            position: 'top-right',
+            type: 'error',
+            hideProgressBar: true,
+          })
+          setLoginLoading(false)
+        },
+      },
+    )
+  })
+
   return (
-    <form>
-      <Card sx={{ minWidth: 275 }}>
-        <Container>
+    <form onSubmit={onSubmit}>
+      <Grid container>
+        <CardStyled>
           <CardContent>
-            <Typography>This is header</Typography>
-            <TextField
-              data-testid="signin-input-username"
-              variant="standard"
+            <Grid container>
+              <Box display="flex" justifyContent="center" mb={2}>
+                <img
+                  src="/static/images/dashboard-icon.png"
+                  width="50%"
+                  alt="logo"
+                />
+              </Box>
+            </Grid>
+            <TextFieldStyled
+              {...textFieldProps}
+              {...register('username')}
+              type="text"
               label="Username"
+              error={errors.username ? true : false}
+              autoFocus
             />
-            <TextField
-              data-testid="signin-input-password"
-              type="password"
-              variant="standard"
+            <TextFieldStyled
+              {...textFieldProps}
+              {...register('password')}
               label="Password"
+              type={passwordVisible ? 'text' : 'password'}
+              error={errors.password ? true : false}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      onClick={() => setPasswordVisible(!passwordVisible)}>
+                      {passwordVisible ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
             />
+            <ButtonGroupStyled
+              orientation="vertical"
+              fullWidth
+              gap={2}
+              sx={{ marginTop: theme.spacing(5) }}>
+              <ButtonStyled
+                type="submit"
+                variant="contained"
+                fullWidth
+                color="sky">
+                {loginLoading ? (
+                  <CircularProgress size={24} style={{ color: 'white' }} />
+                ) : (
+                  'Sign In'
+                )}
+              </ButtonStyled>
+              <ButtonStyled
+                variant="contained"
+                fullWidth
+                onClick={() => navigate('/sign-up')}>
+                Sign Up
+              </ButtonStyled>
+              <ButtonStyled
+                variant="outlined"
+                fullWidth
+                style={{ color: 'white', borderColor: 'white' }}
+                onClick={() => navigate('/forgot-password')}>
+                Forgot Password?
+              </ButtonStyled>
+            </ButtonGroupStyled>
           </CardContent>
-          <CardActions>
-            <Button
-              data-testid="sign-btn-login"
-              onClick={login}
-              variant="contained">
-              Sign in
-            </Button>
-          </CardActions>
-        </Container>
-      </Card>
+        </CardStyled>
+      </Grid>
     </form>
   )
 }
 
-export default SignIn
+export default observer(SignIn)

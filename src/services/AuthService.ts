@@ -1,14 +1,21 @@
-import { AxiosError } from 'axios'
-import { LoginResponse, LoginDataForm } from 'src/types/auth'
-import Axios from 'src/utils/Axios'
+import { AxiosResponse } from 'axios'
+import Axios from 'src/services/AxiosService'
+import { ServiceError } from '.'
+import { UserPoolConfig, GetUserPoolConfigResponse } from './AuthService.type'
 class AuthService {
-  async signIn(data: LoginDataForm) {
-    const result = await Axios.post<LoginResponse>('/login', data)
-      .then(res => ({ data: res.data, err: null }))
-      .catch((err: AxiosError) => ({
-        err: { message: err.message },
-        data: null,
+  /**
+   * Get AWS cognito user pool data
+   * @returns data CognitoUserPoolData
+   * @returns error ServiceError
+   */
+  async getUserPoolConfig(): Promise<GetUserPoolConfigResponse> {
+    // call with base uri
+    const result = await Axios.get('')
+      .then((res: AxiosResponse<UserPoolConfig>) => ({
+        data: res.data,
+        error: null,
       }))
+      .catch((error: ServiceError) => ({ data: null, error }))
     return result
   }
 }
