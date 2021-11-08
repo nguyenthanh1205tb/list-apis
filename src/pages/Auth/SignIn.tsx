@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import {
   CardContent,
@@ -42,8 +42,7 @@ const loginFormSchema = Yup.object().shape({
 
 function SignIn() {
   const navigate = useNavigate()
-  const { userPoolConfig, cognitoUserSession, setCognitoUserSession } =
-    AuthStore
+  const { userPoolConfig, setCognitoUserSession } = AuthStore
   const [loginLoading, setLoginLoading] = useState<boolean>(false)
 
   const {
