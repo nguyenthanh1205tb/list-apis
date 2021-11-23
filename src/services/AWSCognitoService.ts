@@ -9,9 +9,9 @@ class AWSCognitoService {
   private user: CognitoUser | null = null
   private pool: CognitoUserPool | null = null
 
-  constructor(props: { user: CognitoUser; pool: CognitoUserPool }) {
-    this.user = props.user
-    this.pool = props.pool
+  constructor(identity: { user: CognitoUser; pool: CognitoUserPool }) {
+    this.user = identity.user
+    this.pool = identity.pool
   }
 
   /**

@@ -14,7 +14,7 @@ function App() {
   }, [data])
   return (
     <Fragment>
-      <ToastContainer />
+      <ToastContainer position="top-right" pauseOnHover hideProgressBar />
       <Router />
     </Fragment>
   )
