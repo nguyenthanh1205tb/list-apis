@@ -1,0 +1,18 @@
+[
+  {
+    "title": "/ISAPI/Event/notification/httpHosts/capabilities",
+    "method": "GET",
+    "queries": {
+      "!ID": {
+        "type": "string",
+        "desc": "Optional string, the receiving server ID, which is required when you get the information of a receiving server."
+      }
+    },
+    "body": null,
+    "desc": "Get receiving server configuration capability."
+  },
+  {
+    "title": "/ISAPI/Event/notification/httpHosts",
+    "desc": "Get or set IP address of receiving server(s), add a receiving server, or delete receiving server(s)."
+  }
+]
